@@ -8,7 +8,6 @@ public class HelprApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HelprApplication.class, args);
-		System.out.println("Olá Mundo!");
+		System.out.println("Servidor HelpR.soulcode.com Funcionando localhost:8080");
 	}
-
 }
