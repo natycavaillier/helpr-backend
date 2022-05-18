@@ -27,14 +27,13 @@ SELECT nome, FLOOR(DATEDIFF(NOW(), dt_nascimento) / 365) AS idade FROM empregado
 
 /* Exercícos de Filtros e Cálculos*/
 /* 1.Alterar a idade da Rosemay para  1992-02-15. */
+UPDATE empregado SET dt_nascimento = "1992-02-15" WHERE cod_empregado=2;
 /* 2.Calcular o tempo de empresa de todos os funcionários. */
+SELECT nome, FLOOR(DATEDIFF(NOW(), dt_admissao)/365) AS tempo_depto from empregado;
 /* 3.Calcular a idade de todos os dependentes. */
+SELECT nome, FLOOR(DATEDIFF(NOW(), dt_nascimento) / 365) AS idade FROM dependentes;
+/* Filtrar os dependentes idade igual ou menor que 3 anos. */ 
+SELECT nome, FLOOR(DATEDIFF(NOW(), dt_nascimento) / 365) AS idade FROM dependentes WHERE FLOOR(DATEDIFF(NOW(), dt_nascimento) / 365) <=3;
 /* 5.Filtar os funcionarios que ganham mais de 1 salários e que nasceram na decada de 90 */
-
-
-
-
-
-
-
-
+SELECT cod_empregado FROM empregado WHERE dt_nascimento LIKE "199%";
+SELECT * FROM empregado WHERE cod_empregado IN(SELECT cod_empregado FROM empregado WHERE dt_nascimento LIKE "199%") and salario>1212;
