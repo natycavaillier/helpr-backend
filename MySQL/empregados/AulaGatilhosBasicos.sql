@@ -1,6 +1,6 @@
 USE empregados_db;
 SELECT * FROM departamento;
-SELECT * FROM empregado;
+SELECT * FROM empregado WHERE cod_empregado = 16;
 SELECT * FROM dependentes;
 SELECT * FROM log_salario;
 SELECT * FROM log_depto;
@@ -39,7 +39,6 @@ UPDATE empregado set salario=2560.30 WHERE cod_empregado=1;
 ROLLBACK;
 COMMIT;
 /* Tabela de Log_Depto*/
-START TRANSACTION;
 CREATE TABLE `empregados_db`.`log_depto` (
   `cod_log_depto` INT NOT NULL AUTO_INCREMENT,
   `cod_empregado` INT NOT NULL,
@@ -49,8 +48,7 @@ CREATE TABLE `empregados_db`.`log_depto` (
   `depto_novo` INT NOT NULL,
   `correcao_log` BIT(1) NOT NULL,
   PRIMARY KEY (`cod_log_depto`));
-  ROLLBACK;
-  COMMIT;
+
   /* Gatilho de empregado troca depto */
 DELIMITER //
 CREATE TRIGGER tg_log_depto_update BEFORE UPDATE ON empregado
@@ -114,3 +112,5 @@ UPDATE empregado set cod_depto=3 WHERE cod_empregado=14;
 ROLLBACK;
 COMMIT;
 */
+UPDATE empregado set cod_depto=1 WHERE cod_empregado=13;
+UPDATE log_depto set emp_troca=16, correcao_log = 1  WHERE cod_log_depto=7;
