@@ -36,4 +36,3 @@ DELIMITER ;
 CALL sps_verifica_log_salario("2022-05-01","2022-06-01");
 UPDATE empregado SET salario=5530.50 WHERE cod_empregado=4;
 UPDATE log_salario SET correcao_legal=1, id_correcao=16 WHERE cod_log_salario=7;
-
