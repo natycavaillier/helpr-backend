@@ -11,9 +11,8 @@ import com.api.helpr.domain.Tecnico;
 import com.api.helpr.services.TecnicoService;
 
 @RestController
-@RequestMapping(value = "/service/tecnico")
+@RequestMapping(value = "/service/tecnicos")
 public class TecnicoResource {
-	//localhost:8080/service/tecnico/1
 	
 	@Autowired
 	private TecnicoService service;
@@ -23,6 +22,4 @@ public class TecnicoResource {
 		Tecnico obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
 }
