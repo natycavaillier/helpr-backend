@@ -38,7 +38,6 @@ public class Tecnico extends Pessoa {
 		this.email =obj.getEmail();
 		this.senha = obj.getSenha();
 		this.perfils = obj.getPerfils().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
-		addPerfils(Perfil.CLIENTE);
 	}
 	
 	public List<Chamado> getChamados() {
