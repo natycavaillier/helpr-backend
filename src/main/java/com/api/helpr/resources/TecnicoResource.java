@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 	}
 	
-	@GetMapping(value="/all")
+	@GetMapping
 	public ResponseEntity<List<TecnicoDTO>> findAllTecnicos(){
 		List<Tecnico> list = service.findAllTecnicos();
 		List<TecnicoDTO> listDto = list.stream()
@@ -39,8 +41,8 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@PostMapping(value = "/add")
-	public ResponseEntity<TecnicoDTO> createTecnico(@RequestBody TecnicoDTO objDto){
+	@PostMapping
+	public ResponseEntity<TecnicoDTO> createTecnico(@Valid @RequestBody TecnicoDTO objDto){
 		Tecnico newObj = service.create(objDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(newObj.getId()).toUri();
