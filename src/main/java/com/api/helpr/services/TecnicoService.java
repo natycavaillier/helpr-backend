@@ -39,6 +39,14 @@ public class TecnicoService {
 		return repository.save(newObj);
 	}
 
+	public Tecnico update(Integer id, TecnicoDTO objDto) {
+		objDto.setId(id);
+		Tecnico oldObj = findById(id);
+		validaCpfEEmail(objDto);
+		oldObj = new Tecnico(objDto);
+		return repository.save(oldObj);
+	}
+	
 	private void validaCpfEEmail(TecnicoDTO objDto) {
 
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
