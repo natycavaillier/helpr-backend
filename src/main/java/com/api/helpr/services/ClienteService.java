@@ -1,6 +1,8 @@
 package com.api.helpr.services;
 
 
+
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class ClienteService {
 	public Cliente findById(Integer id) {
 		Optional<Cliente> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não foi encontrado: " + id));
+	}
+	
+	//Método de busca para todos os registros de clientes
+	public List<Cliente> findAllClientes(){
+		return repository.findAll();
 	}
 	
 }
