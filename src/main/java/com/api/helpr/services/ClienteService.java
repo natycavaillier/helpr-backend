@@ -17,26 +17,21 @@ import com.api.helpr.services.exceptions.ObjectNotFoundException;
 @Service
 public class ClienteService {
 
-	// Injeção de dependencias
-	// Vínculo com repositório ClienteRepository
 	@Autowired
 	private ClienteRepository repository;
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	// Método de busca de um cliente por um ID no banco
 	public Cliente findById(Integer id) {
 		Optional<Cliente> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não foi encontrado: " + id));
 	}
 
-	// Método de busca para todos os registros de clientes
 	public List<Cliente> findAllClientes() {
 		return repository.findAll();
 	}
 
-	// Método que fará a criação de novo cliente
 	public Cliente create(ClienteDTO objDto) {
 		objDto.setId(null);
 		validaCpfEEmail(objDto);
@@ -44,7 +39,6 @@ public class ClienteService {
 		return repository.save(newObj);
 	}
 
-	// Método que modifica os clientes existentes
 	public Cliente update(Integer id, ClienteDTO objDto) {
 		objDto.setId(id);
 		Cliente oldObj = findById(id);
@@ -53,7 +47,6 @@ public class ClienteService {
 		return repository.save(oldObj);
 	}
 
-	// Método que deleta um cliente pelo id
 	public void delete(Integer id) {
 		Cliente obj = findById(id);
 		if(obj.getChamados().size() > 0) {
@@ -64,7 +57,6 @@ public class ClienteService {
 		repository.deleteById(id);
 	}
 	
-	//Método que valida os CPFs e E-mails para update e create
 	private void validaCpfEEmail(ClienteDTO objDto) {
 
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
