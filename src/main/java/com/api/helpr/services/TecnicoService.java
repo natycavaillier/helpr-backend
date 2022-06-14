@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.api.helpr.domain.Pessoa;
@@ -22,6 +23,9 @@ public class TecnicoService {
 
 	@Autowired //Vinculo com repositório de pessoa.
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	//Métoido de busca por um ID no banco.
 	public Tecnico findById(Integer id) {
@@ -37,6 +41,7 @@ public class TecnicoService {
 	//Método que fará a criação de novo técnico.
 	public Tecnico create(TecnicoDTO objDto) {
 		objDto.setId(null);
+		objDto.setSenha(encoder.encode(objDto.getSenha()));
 		validaCpfEEmail(objDto);
 		Tecnico newObj = new Tecnico(objDto);
 		return repository.save(newObj);
