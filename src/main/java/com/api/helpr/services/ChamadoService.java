@@ -53,6 +53,10 @@ public class ChamadoService {
 		return repository.save(oldObj);
 	}
 	
+	public List<Chamado> reportChamadoTecnico(Integer tecnico) {
+		return repository.findByTecnico(tecnico);
+	}
+	
 	public Chamado newChamado(ChamadoDTO obj) {
 		Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
 		Cliente cliente = clienteService.findById(obj.getCliente());
