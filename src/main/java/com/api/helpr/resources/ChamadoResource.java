@@ -45,7 +45,7 @@ public class ChamadoResource {
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_TECNICO')")
-	@GetMapping(value="/relatorios/{tecnico}")
+	@GetMapping(value="/relatorios/tecnicos/{tecnico}")
 	public ResponseEntity<List<ChamadoDTO>> findReportChamadoTecnico(@PathVariable Integer tecnico){
 		List<Chamado> reportList = service.reportChamadoTecnico(tecnico);
 		List<ChamadoDTO> listDto = reportList.stream().map(rel -> new ChamadoDTO(rel)).collect(Collectors.toList());
