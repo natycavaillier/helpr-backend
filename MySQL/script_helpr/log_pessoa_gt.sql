@@ -34,3 +34,5 @@ BEGIN
 	END CASE;
 END //
 DELIMITER ;
+
+select * from log_tecnico_update;

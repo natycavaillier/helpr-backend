@@ -1,6 +1,7 @@
 package com.api.helpr.resources;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.api.helpr.domain.Chamado;
 import com.api.helpr.domain.Cliente;
+import com.api.helpr.domain.LogChamadoStatus;
 import com.api.helpr.domain.dtos.ChamadoDTO;
 import com.api.helpr.domain.dtos.ClienteDTO;
 import com.api.helpr.services.ChamadoService;
@@ -76,4 +78,11 @@ public class ChamadoResource {
 		return ResponseEntity.ok().body(new ChamadoDTO(newObj));
 	}
 
+	@GetMapping(value="/log/status")
+	public ResponseEntity<List<LogChamadoStatus>> findLogStatusChamado(){
+		LocalDate dataDia = LocalDate.now();
+		List<LogChamadoStatus> logList = service.findDiaLogChamado(dataDia);
+		return ResponseEntity.ok().body(logList);
+	}
+	
 }
