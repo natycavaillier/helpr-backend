@@ -13,3 +13,4 @@ DELIMITER ;
 select * from chamado;
 
 select * from log_chamado_status;
+
